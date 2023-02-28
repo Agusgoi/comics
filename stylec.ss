@@ -20,14 +20,4 @@ header .contain-banner {
   background-size: cover;
 }
 
-section {
-  width: 100vw;
-  background-color: rgb(232, 232, 184);
-  padding: 40px;
-}
-section .contain-search .cont-search-inputs {
-  display: flex;
-  gap: 30px;
-}
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=stylec.ss.map */
