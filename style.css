@@ -13,5 +13,11 @@ header .contain-logo {
   background-color: black;
   height: 60px;
 }
+header .contain-banner {
+  background-color: rgb(239, 192, 192);
+  height: 200px;
+  background-image: url("");
+  background-size: cover;
+}
 
 /*# sourceMappingURL=style.css.map */
