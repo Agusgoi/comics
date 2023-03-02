@@ -68,12 +68,14 @@ section {
 }
 section .contain-search h2 {
   padding: 50px 0px 0px 50px;
+  font-size: 30px;
 }
 section .contain-search .cont-search-inputs {
   display: flex;
   gap: 30px;
   background-color: rgb(241, 148, 148);
   justify-content: space-evenly;
+  align-items: center;
   padding: 20px;
 }
 section .result {
@@ -81,6 +83,20 @@ section .result {
 }
 section .result h2 {
   padding-bottom: 30px;
+  font-size: 30px;
+}
+
+footer {
+  width: 100vw;
+  background-color: black;
+  height: 150px;
+}
+footer h3 {
+  color: white;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 60px;
 }
 
 .search-box {
@@ -102,6 +118,20 @@ section .result h2 {
   border-radius: 5px;
   font-size: 25px;
   padding: 0px 30px;
+  height: 50px;
+}
+
+select {
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 0px 30px;
+  height: 50px;
+}
+
+label {
+  font-size: 20px;
+  padding-right: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
