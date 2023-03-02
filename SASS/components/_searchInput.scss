@@ -1,13 +1,15 @@
 .search-box {
     width: 50%;
-    height: 50px;
-    
-    background-color: lightblue;
+    height: 60px;
+   
     
     .search-input {
         height: 100%;
         width: 80%;
         border: none;
+        border-radius: 10px;
         padding: 10px;
+        font-size: 25px;
+        opacity: 50%;
     }
 }

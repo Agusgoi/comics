@@ -1,9 +1,51 @@
-* {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Source Sans Pro", sans-serif;
-  scroll-behavior: smooth;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 header {
@@ -23,30 +65,43 @@ header .contain-banner {
 section {
   width: 100vw;
   background-color: rgb(232, 232, 184);
-  padding: 40px;
+}
+section .contain-search h2 {
+  padding: 50px 0px 0px 50px;
 }
 section .contain-search .cont-search-inputs {
   display: flex;
   gap: 30px;
-  background-color: lightcoral;
+  background-color: rgb(241, 148, 148);
+  justify-content: space-evenly;
+  padding: 20px;
 }
 section .result {
-  padding-top: 50px;
+  padding: 50px 0px 50px 50px;
 }
 section .result h2 {
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 
 .search-box {
   width: 50%;
-  height: 50px;
-  background-color: lightblue;
+  height: 60px;
 }
 .search-box .search-input {
   height: 100%;
   width: 80%;
   border: none;
+  border-radius: 10px;
   padding: 10px;
+  font-size: 25px;
+  opacity: 50%;
+}
+
+.btn-search {
+  border: none;
+  border-radius: 5px;
+  font-size: 25px;
+  padding: 0px 30px;
 }
 
 /*# sourceMappingURL=style.css.map */
