@@ -28,6 +28,25 @@ section {
 section .contain-search .cont-search-inputs {
   display: flex;
   gap: 30px;
+  background-color: lightcoral;
+}
+section .result {
+  padding-top: 50px;
+}
+section .result h2 {
+  padding-bottom: 15px;
+}
+
+.search-box {
+  width: 50%;
+  height: 50px;
+  background-color: lightblue;
+}
+.search-box .search-input {
+  height: 100%;
+  width: 80%;
+  border: none;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -6,7 +6,15 @@ section {
     .contain-search .cont-search-inputs {
             display: flex;
             gap: 30px;
+            background-color: lightcoral;
         }
 
+        .result {
+            padding-top: 50px;
+
+            h2 {
+                padding-bottom: 15px;
+            }
+        }
 
 }
