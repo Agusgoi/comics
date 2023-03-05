@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/build/md5.min.js"></script>
     <title>COMICS</title>
 </head>
 
@@ -16,14 +17,14 @@
             <img id="logo" src="">
         </div>
         <div class="contain-banner">
-            <img id="banner" src="">
+            <img id="banner" src="images/banner.png">
         </div>
     </header>
 
     <main>
         <section>
             <div class="contain-search">
-                <h2>Búsqueda</h2>
+                <h2>BUSQUEDA</h2>
 
 
 
@@ -35,7 +36,7 @@
                     <div>
                         <label for="">Tipo</label>
                         <select name="" id="">
-                            <option value="">Seleccionar</option>
+                            <option value=""disabled selected>Seleccionar</option>
                             <option value="">Comic</option>
                             <option value="">Personaje</option>
                             
@@ -45,7 +46,7 @@
                     <div>
                         <label for="">Orden</label>
                         <select name="" id="">
-                            <option value="">Seleccionar</option>
+                            <option value="" disabled selected>Seleccionar</option>
                             <option value="">A-Z</option>
                             <option value="">Z-A</option>
                         </select>
@@ -54,16 +55,25 @@
                 </div>
             </div>
             <div class="result">
-                <h2>Resultados</h2>
+                <h2>RESULTADO</h2>
                 <h3>X resultados</h3>
             </div>
         </section>
-        <div class="contain-cards"></div>
+        <div class="contain-cards">
+            <div class="card">
+            <img src="https://thronesapi.com/assets/images/olenna-tyrell.jpg">
+            <p>Primer y segundo nombre</p>
+            <p>title</p>
+        
+        </div> 
+        </div>
     </main>
 
     <footer>
         <h3>Hecho por AgusGoi</h3>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 
 </html>

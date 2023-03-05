@@ -2,6 +2,8 @@ footer {
     width: 100vw;
     background-color: black;
     height: 150px;
+    left: 0;
+    bottom: 0;
 
     h3{
         color: white;
@@ -9,5 +11,7 @@ footer {
         display: flex;
         justify-content: center;
         padding: 60px;
+        font-family: $genericFontType;
     }
 }
+

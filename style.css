@@ -56,30 +56,41 @@ header .contain-logo {
   height: 60px;
 }
 header .contain-banner {
-  background-color: rgb(239, 192, 192);
-  height: 200px;
-  background-image: url("");
+  width: 100%;
   background-size: cover;
+}
+header .contain-banner .banner {
+  width: 1400px;
+}
+
+.foto {
+  width: 50%;
+}
+
+#mujer {
+  min-width: 200px;
+  max-width: 500px;
 }
 
 section {
   width: 100vw;
-  background-color: rgb(232, 232, 184);
+  background-color: rgb(75, 130, 137);
 }
 section .contain-search h2 {
-  padding: 50px 0px 0px 50px;
+  padding: 50px 0px 0px 70px;
   font-size: 30px;
+  font-family: monospace;
 }
 section .contain-search .cont-search-inputs {
   display: flex;
   gap: 30px;
-  background-color: rgb(241, 148, 148);
   justify-content: space-evenly;
   align-items: center;
   padding: 20px;
 }
 section .result {
-  padding: 50px 0px 50px 50px;
+  padding: 50px 0px 50px 70px;
+  font-family: monospace;
 }
 section .result h2 {
   padding-bottom: 30px;
@@ -90,6 +101,8 @@ footer {
   width: 100vw;
   background-color: black;
   height: 150px;
+  left: 0;
+  bottom: 0;
 }
 footer h3 {
   color: white;
@@ -97,6 +110,7 @@ footer h3 {
   display: flex;
   justify-content: center;
   padding: 60px;
+  font-family: monospace;
 }
 
 .search-box {
@@ -111,6 +125,7 @@ footer h3 {
   padding: 10px;
   font-size: 25px;
   opacity: 50%;
+  font-family: monospace;
 }
 
 .btn-search {
@@ -119,6 +134,7 @@ footer h3 {
   font-size: 25px;
   padding: 0px 30px;
   height: 50px;
+  font-family: monospace;
 }
 
 select {
@@ -127,11 +143,39 @@ select {
   font-size: 20px;
   padding: 0px 30px;
   height: 50px;
+  font-family: monospace;
 }
 
 label {
   font-size: 20px;
   padding-right: 10px;
+  font-family: monospace;
+}
+
+.contain-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.contain-cards .card {
+  width: 20%;
+  background-color: black;
+  margin: 10px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  border-radius: 15px;
+  transition: all 0.5s ease-in-out;
+}
+.contain-cards .card img {
+  height: 70%;
+  width: 90%;
 }
 
 /*# sourceMappingURL=style.css.map */

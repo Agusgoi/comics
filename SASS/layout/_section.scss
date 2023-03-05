@@ -1,23 +1,24 @@
 section {
     width: 100vw;
-    background-color: rgb(232, 232, 184);
+    background-color: rgb(75, 130, 137);
 
     .contain-search h2{
-        padding: 50px 0px 0px 50px;
+        padding: 50px 0px 0px 70px;
         font-size: 30px;
+        font-family: $genericFontType;
     }
 
     .contain-search .cont-search-inputs {
             display: flex;
             gap: 30px;
-            background-color: rgb(241, 148, 148);
             justify-content: space-evenly;
             align-items: center;
             padding: 20px;
         }
 
         .result {
-            padding: 50px 0px 50px 50px;
+            padding: 50px 0px 50px 70px;
+            font-family: $genericFontType;
 
             h2 {
                 padding-bottom: 30px;
