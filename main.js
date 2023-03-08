@@ -12,6 +12,7 @@ window.addEventListener("load", () => {
   // variables
 
   const $containCards = $(".contain-cards");
+  const $results = $(".results");
 
   const $btnSearch = $(".btn-search");
 
@@ -35,6 +36,8 @@ window.addEventListener("load", () => {
   // Paint
   const paint = (array) => {
     $containCards.innerHTML = "";
+    $results.innerText = "";
+
     array.forEach((character) => {
       if ($typeFilter.value === "character") {
         $containCards.innerHTML += `
@@ -55,6 +58,18 @@ window.addEventListener("load", () => {
       }
     });
   };
+
+  // Count
+
+  const results = (array, total) => {
+    if (array != "") {
+      $results.innerText = `${total} resultado/s`
+  }else{
+    $containCards.innerHTML = "";
+    $results.innerText =
+      "No se encontraron resultados para tu busqueda.";
+  }
+  }
 
   // Order
 
@@ -99,8 +114,10 @@ window.addEventListener("load", () => {
         .then((response) => response.json())
         .then((info) => {
           let charactersByInputValue = info.data.results;
+          let totalCharacters = info.data.total
           order(charactersByInputValue);
           paint(charactersByInputValue);
+          results(charactersByInputValue, totalCharacters)
         })
 
         .catch((error) => console.log(error));
@@ -110,14 +127,21 @@ window.addEventListener("load", () => {
       )
         .then((response) => response.json())
         .then((info) => {
+          console.log(info)
           let comicsByInputValue = info.data.results;
-          order(comicsByInputValue);
-          paint(comicsByInputValue);
+         let totalComics = info.data.total;
+            order(comicsByInputValue);
+            paint(comicsByInputValue);
+            results(comicsByInputValue, totalComics)
+          
         })
 
         .catch((error) => console.log(error));
     }
   });
+
+
+
 
   //cierran el window
 });

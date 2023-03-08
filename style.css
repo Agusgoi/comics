@@ -88,13 +88,16 @@ section .contain-search .cont-search-inputs {
   align-items: center;
   padding: 20px;
 }
-section .result {
+section .result-box {
   padding: 50px 0px 50px 70px;
   font-family: monospace;
 }
-section .result h2 {
+section .result-box h2 {
   padding-bottom: 30px;
   font-size: 30px;
+}
+section .result-box h3 {
+  font-size: 20px;
 }
 
 footer {
