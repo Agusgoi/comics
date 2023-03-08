@@ -20,20 +20,54 @@ window.addEventListener("load", () => {
   const $typeFilter = $(".type-filter");
   const $orderSelect = $(".order-select");
 
-  // GET Array
+  // ------------------- Default array -------------------
   fetch(
-    `https://gateway.marvel.com//v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+    `https://gateway.marvel.com//v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`
   )
     .then((response) => response.json())
-    //.then (data => console.log(data))
     .then((info) => {
-      let characters = info.data.results;
-      paint(characters);
+      let comics = info.data.results;
+      let totalComics = info.data.total;
+      paint(comics);
+      results(comics, totalComics);
     })
 
     .catch((error) => console.log(error));
 
-  // Paint
+  // ------------------- Filter -------------------
+  const filterByType = () => {
+    if ($typeFilter.value === "character") {
+      fetch(
+        `https://gateway.marvel.com//v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      )
+        .then((response) => response.json())
+        .then((info) => {
+          let array = info.data.results;
+          let totalArray = info.data.total;
+          order(array);
+          paint(array);
+          results(array, totalArray);
+        })
+
+        .catch((error) => console.log(error));
+    } else {
+      fetch(
+        `https://gateway.marvel.com//v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      )
+        .then((response) => response.json())
+        .then((info) => {
+          let array = info.data.results;
+          let totalArray = info.data.total;
+          order(array);
+          paint(array);
+          results(array, totalArray);
+        })
+
+        .catch((error) => console.log(error));
+    }
+  };
+
+  // ------------------- Paint -------------------
   const paint = (array) => {
     $containCards.innerHTML = "";
     $results.innerText = "";
@@ -59,19 +93,18 @@ window.addEventListener("load", () => {
     });
   };
 
-  // Count
+  // ------------------- Count -------------------
 
-  const results = (array, total) => {
+  const results = (array, count) => {
     if (array != "") {
-      $results.innerText = `${total} resultado/s`
-  }else{
-    $containCards.innerHTML = "";
-    $results.innerText =
-      "No se encontraron resultados para tu busqueda.";
-  }
-  }
+      $results.innerText = `${count} resultado/s`;
+    } else {
+      $containCards.innerHTML = "";
+      $results.innerText = "No se encontraron resultados para tu busqueda.";
+    }
+  };
 
-  // Order
+  // ------------------- Order -------------------
 
   const order = (array) => {
     if ($typeFilter.value === "character") {
@@ -105,43 +138,43 @@ window.addEventListener("load", () => {
     }
   };
 
-  // Search Characters/Comics by SearchInput
+  // ------------------- Search Characters/Comics -------------------
   $btnSearch.addEventListener("click", () => {
-    if ($typeFilter.value === "character") {
-      fetch(
-        `https://gateway.marvel.com//v1/public/characters?nameStartsWith=${$searchInput.value}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
-      )
-        .then((response) => response.json())
-        .then((info) => {
-          let charactersByInputValue = info.data.results;
-          let totalCharacters = info.data.total
-          order(charactersByInputValue);
-          paint(charactersByInputValue);
-          results(charactersByInputValue, totalCharacters)
-        })
+    if ($searchInput.value != "") {
+      if ($typeFilter.value === "character") {
+        fetch(
+          `https://gateway.marvel.com//v1/public/characters?nameStartsWith=${$searchInput.value}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+        )
+          .then((response) => response.json())
+          .then((info) => {
+            let charactersByInputValue = info.data.results;
+            let totalCharactersFiltered = info.data.total;
+            order(charactersByInputValue);
+            paint(charactersByInputValue);
+            results(charactersByInputValue, totalCharactersFiltered);
+          })
 
-        .catch((error) => console.log(error));
-    } else {
-      fetch(
-        `https://gateway.marvel.com//v1/public/comics?titleStartsWith=${$searchInput.value}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
-      )
-        .then((response) => response.json())
-        .then((info) => {
-          console.log(info)
-          let comicsByInputValue = info.data.results;
-         let totalComics = info.data.total;
+          .catch((error) => console.log(error));
+      } else {
+        fetch(
+          `https://gateway.marvel.com//v1/public/comics?titleStartsWith=${$searchInput.value}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+        )
+          .then((response) => response.json())
+          .then((info) => {
+            console.log(info);
+            let comicsByInputValue = info.data.results;
+            let totalComicsFiltered = info.data.total;
             order(comicsByInputValue);
             paint(comicsByInputValue);
-            results(comicsByInputValue, totalComics)
-          
-        })
+            results(comicsByInputValue, totalComicsFiltered);
+          })
 
-        .catch((error) => console.log(error));
+          .catch((error) => console.log(error));
+      }
+    } else {
+      filterByType();
     }
   });
-
-
-
 
   //cierran el window
 });
