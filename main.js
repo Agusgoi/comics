@@ -147,6 +147,7 @@ window.addEventListener("load", () => {
         )
           .then((response) => response.json())
           .then((info) => {
+            console.log(info)
             let charactersByInputValue = info.data.results;
             let totalCharactersFiltered = info.data.total;
             order(charactersByInputValue);

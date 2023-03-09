@@ -1,0 +1,16 @@
+.cont-card-detail{
+    display: flex;
+    width: 60%;
+    background-color: pink;
+    justify-content: center;
+    padding: 20px;
+    
+    .contain-img {
+        width: 60%;
+        padding: 10px;
+    
+        .card-img{
+            width: 100%;
+        }
+    }
+}

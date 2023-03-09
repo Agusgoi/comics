@@ -3,7 +3,8 @@
 @import 'SASS/base/reset';
 
 @import 'SASS/layout/header';
-@import 'SASS/layout/section';
+@import 'SASS/layout/searchSection';
+@import 'SASS/layout/detailSection';
 @import 'SASS/layout/footer';
 
 @import 'SASS/components/searchInput';
@@ -11,3 +12,5 @@
 @import 'SASS/components/filtersInput';
 @import 'SASS/components/containCards';
 @import 'SASS/components/card';
+@import 'SASS/components/contCardDetail';
+@import 'SASS/components/card-info';
