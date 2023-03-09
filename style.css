@@ -72,32 +72,38 @@ header .contain-banner .banner {
   max-width: 500px;
 }
 
-section {
+.search-section {
   width: 100vw;
   background-color: rgb(75, 130, 137);
 }
-section .contain-search h2 {
+.search-section .contain-search h2 {
   padding: 50px 0px 0px 70px;
   font-size: 30px;
   font-family: monospace;
 }
-section .contain-search .cont-search-inputs {
+.search-section .contain-search .cont-search-inputs {
   display: flex;
   gap: 30px;
   justify-content: space-evenly;
   align-items: center;
   padding: 20px;
 }
-section .result-box {
+.search-section .result-box {
   padding: 50px 0px 50px 70px;
   font-family: monospace;
 }
-section .result-box h2 {
+.search-section .result-box h2 {
   padding-bottom: 30px;
   font-size: 30px;
 }
-section .result-box h3 {
+.search-section .result-box h3 {
   font-size: 20px;
+}
+
+.detail-section {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
 }
 
 footer {
@@ -156,7 +162,7 @@ label {
 }
 
 .contain-cards {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
@@ -179,6 +185,28 @@ label {
 .contain-cards .card img {
   height: 70%;
   width: 90%;
+}
+
+.cont-card-detail {
+  display: flex;
+  width: 60%;
+  background-color: pink;
+  justify-content: center;
+  padding: 20px;
+}
+.cont-card-detail .contain-img {
+  width: 60%;
+  padding: 10px;
+}
+.cont-card-detail .contain-img .card-img {
+  width: 100%;
+}
+
+.card-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
