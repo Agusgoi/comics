@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/js-md5@0.7.3/build/md5.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
     <title>COMICS</title>
 </head>
 
@@ -17,10 +20,10 @@
     <header>
 
         <div class="contain-logo">
-            <img id="logo" src="">
+            <p>ADA COMICS</p>
         </div>
         <div class="contain-banner">
-            <img id="banner" src="images/banner.png">
+            <img id="banner" >
         </div>
     </header>
     <!-- End Header -->
@@ -67,20 +70,29 @@
         <!-- End Contain Cards -->
 
         <!-- Card Detail Section -->
-        <section class="detail-section">
-            <div class="cont-card-detail">
-                <div class="contain-img">
-                    <img class="card-img" src="http://i.annihil.us/u/prod/marvel/i/mg/9/30/535feab462a64.jpg">
-                </div>
-                <div class="card-info">
-                    <p>Titulo</p>
-                    <p>Anio</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolores quibusdam quas dicta nam
-                        debitis nesciunt ipsum enim eos possimus quidem necessitatibus, blanditiis neque alias velit
-                        amet vel, incidunt dolorum?</p>
-                </div>
+
+        <div class="cont-card-detail">
+            <div class="contain-img">
+                <img class="card-img" src="http://i.annihil.us/u/prod/marvel/i/mg/9/30/535feab462a64.jpg">
             </div>
-        </section>
+            <div class="card-info">
+                <p>Titulo</p>
+                <p>Anio</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolores quibusdam quas dicta nam
+                    debitis nesciunt ipsum enim eos possimus quidem necessitatibus, blanditiis neque alias velit
+                    amet vel, incidunt dolorum?</p>
+            </div>
+        </div>
+
+
+        <div class="contain-btnpages">
+            <button id="init-page">
+                <<</button>
+                    <button id="previous-page">
+                        <</button>
+                            <button id="next-page">></button>
+                            <button id="last-page">>></button>
+        </div>
     </main>
 
     <footer>

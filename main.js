@@ -9,8 +9,8 @@ const hash = md5(`${ts}${privateKey}${publicKey}`);
 const $ = (selector) => document.querySelector(selector);
 
 window.addEventListener("load", () => {
-  // variables
 
+  // variables
   const $containCards = $(".contain-cards");
   const $results = $(".results");
   const $card = $(".card");
@@ -21,16 +21,14 @@ window.addEventListener("load", () => {
   const $typeFilter = $(".type-filter");
   const $orderSelect = $(".order-select");
 
-  
   let type = `comics`;
   let orderByDate = "";
   let orderByName = "";
   let orderByTitle = "";
-  let nameSearch = ""
+  let nameSearch = "";
+  
 
-
-// ------------------- Default array -------------------
-
+  // ------------------- Default array -------------------
 
   fetch(
     `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
@@ -38,40 +36,32 @@ window.addEventListener("load", () => {
     .then((response) => response.json())
     .then((info) => {
       let arr = info.data.results;
-      let arrCount = info.data.total
+      let arrCount = info.data.total;
       paint(arr);
       results(arr, arrCount);
     })
 
     .catch((error) => console.log(error));
 
-
-
- // ------------------- GET array -------------------
-
-
+  // ------------------- GET array -------------------
 
   const getArray = () => {
-
     fetch(
       `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${orderByName}${orderByTitle}`
     )
       .then((response) => response.json())
       .then((info) => {
-        console.log(info)
         let arr = info.data.results;
-        let arrCount = info.data.total
+        let arrCount = info.data.total;
         paint(arr);
         results(arr, arrCount);
-        //paintCardDetail (charactersByInputValue)
       })
-  
+
       .catch((error) => console.log(error));
+  };
+
   
-    }
-
-
-    // ------------------- Paint -------------------
+  // ------------------- Paint -------------------
   const paint = (array) => {
     $containCards.innerHTML = "";
     $results.innerText = "";
@@ -95,62 +85,51 @@ window.addEventListener("load", () => {
           </div> `;
       }
     });
-   
   };
 
+  // ------------------- btn Event + FILTERS -------------------
 
-// ------------------- btn Event + FILTERS -------------------
+  $btnSearch.addEventListener("click", () => {
+    // Search Input
+    if ($searchInput.value === "") {
+      nameSearch = "";
+    } else {
+      nameSearch = `&nameStartsWith=${$searchInput.value}`;
+    }
 
-$btnSearch.addEventListener("click", () => {
+    // Type
+    if ($typeFilter.value === "characters") {
+      type = `characters`;
+    } else {
+      type = `comics`;
+    }
 
+    // Order by Date
+    if ($typeFilter.value === "comics") {
+      if ($orderSelect.value === "mas-nuevo") {
+        orderByDate = `&orderBy=focDate`;
+      } else if ($orderSelect.value === "mas-viejo") {
+        orderByDate = `&orderBy=-focDate`;
+      }
+    }
 
-  // Search Input
-  if($searchInput.value === "") {
-    nameSearch = ""
-} else {
-    nameSearch = `&nameStartsWith=${$searchInput.value}`
-}
+    // Order by Name/Title
+    if ($typeFilter.value === "characters") {
+      if ($orderSelect.value === "az") {
+        orderByName = `&orderBy=name`;
+      } else if ($orderSelect.value === "za") {
+        orderByName = `&orderBy=-name`;
+      }
+    } else {
+      if ($orderSelect.value === "az") {
+        orderByTitle = `&orderBy=title`;
+      } else if ($orderSelect.value === "za") {
+        orderByTitle = `&orderBy=-title`;
+      }
+    }
 
-
-
-  // Type
-   if($typeFilter.value === "characters") {
-    type = `characters`
-} else {
-    type = `comics`
-}
- 
-
-// Order by Date
-if ($typeFilter.value === "comics") {
-  if ($orderSelect.value === "mas-nuevo") {
-    orderByDate = `&orderBy=focDate`
-  }else if ($orderSelect.value === "mas-viejo"){
-    orderByDate = `&orderBy=-focDate`
-}
-}
-
-// Order by Name/Title
-if ($typeFilter.value === "characters") {
-  if ($orderSelect.value === "az") {
-    orderByName = `&orderBy=name`
-  }else if ($orderSelect.value === "za"){
-    orderByName = `&orderBy=-name`
-}
-}else{
-  if ($orderSelect.value === "az") {
-    orderByTitle = `&orderBy=title`
-  }else if ($orderSelect.value === "za"){
-    orderByTitle = `&orderBy=-title`
-}
-}
-
-getArray()
-
-});
-
-
-  
+    getArray();
+  });
 
   // ------------------- Count -------------------
 
@@ -165,69 +144,21 @@ getArray()
 
   // ------------------- Adding Order Select Options -------------------
 
- 
-
-  $typeFilter.addEventListener('change', () =>{
+  $typeFilter.addEventListener("change", () => {
     if ($typeFilter.value === "comics") {
-      console.log($typeFilter.value)
       $orderSelect.innerHTML = "";
       $orderSelect.innerHTML = `
       <option value="az">A-Z</option>
       <option value="za">Z-A</option>
       <option value="mas-nuevo">Mas nuevo</option>
-      <option value="mas-viejo">Mas viejo</option>`
-    } else{
-      console.log($typeFilter.value)
+      <option value="mas-viejo">Mas viejo</option>`;
+    } else {
       $orderSelect.innerHTML = "";
       $orderSelect.innerHTML = `
       <option value="az">A-Z</option>
-      <option value="za">Z-A</option>`
-    } 
-  })
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-/////////////
-/* const paintCardDetail = (array) =>{
-$cards = document.querySelectorAll(".card");
-console.log($cards)
-$cards.forEach((card) => {
-  card.addEventListener("click", () => {
-    console.log("cardsss");
-
-    fetch(
-      `https://gateway.marvel.com//v1/public/characters/characterId=${card.id}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
-    )
-      .then((response) => response.json())
-
-      .then((info) => {
-        console.log(info)
-        
-      })
-
-      .catch((error) => console.log(error));
-
+      <option value="za">Z-A</option>`;
+    }
   });
-});
-} */
-
-/* const paintCardDetail = (array) =>{
-  $card.addEventListener("click", (e) => {
-    console.log(e)
-    console.log("cardsss");
-  })
-} */
-
-//paintCardDetail()
 
   //cierran el window
 });
