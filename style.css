@@ -101,7 +101,7 @@ header .contain-banner .banner {
 }
 
 .detail-section {
-  display: flex;
+  display: none;
   justify-content: center;
   margin: 10px;
 }
@@ -162,7 +162,7 @@ label {
 }
 
 .contain-cards {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
@@ -193,6 +193,7 @@ label {
   background-color: pink;
   justify-content: center;
   padding: 20px;
+  border-radius: 5px;
 }
 .cont-card-detail .contain-img {
   width: 60%;

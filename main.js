@@ -13,6 +13,7 @@ window.addEventListener("load", () => {
 
   const $containCards = $(".contain-cards");
   const $results = $(".results");
+  const $card = $(".card");
 
   const $btnSearch = $(".btn-search");
 
@@ -20,60 +21,63 @@ window.addEventListener("load", () => {
   const $typeFilter = $(".type-filter");
   const $orderSelect = $(".order-select");
 
-  // ------------------- Default array -------------------
+  
+  let type = `comics`;
+  let orderByDate = "";
+  let orderByName = "";
+  let orderByTitle = "";
+  let nameSearch = ""
+
+
+// ------------------- Default array -------------------
+
+
   fetch(
-    `https://gateway.marvel.com//v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+    `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
   )
     .then((response) => response.json())
     .then((info) => {
-      let comics = info.data.results;
-      let totalComics = info.data.total;
-      paint(comics);
-      results(comics, totalComics);
+      let arr = info.data.results;
+      let arrCount = info.data.total
+      paint(arr);
+      results(arr, arrCount);
     })
 
     .catch((error) => console.log(error));
 
-  // ------------------- Filter -------------------
-  const filterByType = () => {
-    if ($typeFilter.value === "character") {
-      fetch(
-        `https://gateway.marvel.com//v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
-      )
-        .then((response) => response.json())
-        .then((info) => {
-          let array = info.data.results;
-          let totalArray = info.data.total;
-          order(array);
-          paint(array);
-          results(array, totalArray);
-        })
 
-        .catch((error) => console.log(error));
-    } else {
-      fetch(
-        `https://gateway.marvel.com//v1/public/comics?ts=${ts}&apikey=${publicKey}&hash=${hash}`
-      )
-        .then((response) => response.json())
-        .then((info) => {
-          let array = info.data.results;
-          let totalArray = info.data.total;
-          order(array);
-          paint(array);
-          results(array, totalArray);
-        })
 
-        .catch((error) => console.log(error));
+ // ------------------- GET array -------------------
+
+
+
+  const getArray = () => {
+
+    fetch(
+      `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${orderByName}${orderByTitle}`
+    )
+      .then((response) => response.json())
+      .then((info) => {
+        console.log(info)
+        let arr = info.data.results;
+        let arrCount = info.data.total
+        paint(arr);
+        results(arr, arrCount);
+        //paintCardDetail (charactersByInputValue)
+      })
+  
+      .catch((error) => console.log(error));
+  
     }
-  };
 
-  // ------------------- Paint -------------------
+
+    // ------------------- Paint -------------------
   const paint = (array) => {
     $containCards.innerHTML = "";
     $results.innerText = "";
 
     array.forEach((character) => {
-      if ($typeFilter.value === "character") {
+      if ($typeFilter.value === "characters") {
         $containCards.innerHTML += `
           <div class="card">
           <img src=${
@@ -91,7 +95,62 @@ window.addEventListener("load", () => {
           </div> `;
       }
     });
+   
   };
+
+
+// ------------------- btn Event + FILTERS -------------------
+
+$btnSearch.addEventListener("click", () => {
+
+
+  // Search Input
+  if($searchInput.value === "") {
+    nameSearch = ""
+} else {
+    nameSearch = `&nameStartsWith=${$searchInput.value}`
+}
+
+
+
+  // Type
+   if($typeFilter.value === "characters") {
+    type = `characters`
+} else {
+    type = `comics`
+}
+ 
+
+// Order by Date
+if ($typeFilter.value === "comics") {
+  if ($orderSelect.value === "mas-nuevo") {
+    orderByDate = `&orderBy=focDate`
+  }else if ($orderSelect.value === "mas-viejo"){
+    orderByDate = `&orderBy=-focDate`
+}
+}
+
+// Order by Name/Title
+if ($typeFilter.value === "characters") {
+  if ($orderSelect.value === "az") {
+    orderByName = `&orderBy=name`
+  }else if ($orderSelect.value === "za"){
+    orderByName = `&orderBy=-name`
+}
+}else{
+  if ($orderSelect.value === "az") {
+    orderByTitle = `&orderBy=title`
+  }else if ($orderSelect.value === "za"){
+    orderByTitle = `&orderBy=-title`
+}
+}
+
+getArray()
+
+});
+
+
+  
 
   // ------------------- Count -------------------
 
@@ -104,78 +163,71 @@ window.addEventListener("load", () => {
     }
   };
 
-  // ------------------- Order -------------------
+  // ------------------- Adding Order Select Options -------------------
 
-  const order = (array) => {
-    if ($typeFilter.value === "character") {
-      if ($orderSelect.value === "az") {
-        array = array.sort((a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-        });
-      } else {
-        array = array.sort((a, b) => {
-          if (a.name > b.name) {
-            return -1;
-          }
-        });
-      }
-    } else {
-      if ($orderSelect.value === "az") {
-        array = array.sort((a, b) => {
-          if (a.title < b.title) {
-            return -1;
-          }
-        });
-      } else {
-        array = array.sort((a, b) => {
-          if (a.title > b.title) {
-            return -1;
-          }
-        });
-      }
-    }
-  };
+ 
 
-  // ------------------- Search Characters/Comics -------------------
-  $btnSearch.addEventListener("click", () => {
-    if ($searchInput.value != "") {
-      if ($typeFilter.value === "character") {
-        fetch(
-          `https://gateway.marvel.com//v1/public/characters?nameStartsWith=${$searchInput.value}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
-        )
-          .then((response) => response.json())
-          .then((info) => {
-            console.log(info)
-            let charactersByInputValue = info.data.results;
-            let totalCharactersFiltered = info.data.total;
-            order(charactersByInputValue);
-            paint(charactersByInputValue);
-            results(charactersByInputValue, totalCharactersFiltered);
-          })
+  $typeFilter.addEventListener('change', () =>{
+    if ($typeFilter.value === "comics") {
+      console.log($typeFilter.value)
+      $orderSelect.innerHTML = "";
+      $orderSelect.innerHTML = `
+      <option value="az">A-Z</option>
+      <option value="za">Z-A</option>
+      <option value="mas-nuevo">Mas nuevo</option>
+      <option value="mas-viejo">Mas viejo</option>`
+    } else{
+      console.log($typeFilter.value)
+      $orderSelect.innerHTML = "";
+      $orderSelect.innerHTML = `
+      <option value="az">A-Z</option>
+      <option value="za">Z-A</option>`
+    } 
+  })
+  
 
-          .catch((error) => console.log(error));
-      } else {
-        fetch(
-          `https://gateway.marvel.com//v1/public/comics?titleStartsWith=${$searchInput.value}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
-        )
-          .then((response) => response.json())
-          .then((info) => {
-            console.log(info);
-            let comicsByInputValue = info.data.results;
-            let totalComicsFiltered = info.data.total;
-            order(comicsByInputValue);
-            paint(comicsByInputValue);
-            results(comicsByInputValue, totalComicsFiltered);
-          })
+  
 
-          .catch((error) => console.log(error));
-      }
-    } else {
-      filterByType();
-    }
+
+  
+
+
+  
+
+
+
+/////////////
+/* const paintCardDetail = (array) =>{
+$cards = document.querySelectorAll(".card");
+console.log($cards)
+$cards.forEach((card) => {
+  card.addEventListener("click", () => {
+    console.log("cardsss");
+
+    fetch(
+      `https://gateway.marvel.com//v1/public/characters/characterId=${card.id}&ts=${ts}&apikey=${publicKey}&hash=${hash}`
+    )
+      .then((response) => response.json())
+
+      .then((info) => {
+        console.log(info)
+        
+      })
+
+      .catch((error) => console.log(error));
+
   });
+});
+} */
+
+/* const paintCardDetail = (array) =>{
+  $card.addEventListener("click", (e) => {
+    console.log(e)
+    console.log("cardsss");
+  })
+} */
+
+//paintCardDetail()
 
   //cierran el window
 });
