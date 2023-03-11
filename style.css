@@ -51,16 +51,12 @@ table {
 header {
   width: 100vw;
 }
-header .contain-logo {
-  background-color: black;
-  height: 60px;
-}
 header .contain-banner {
   width: 100%;
+  min-height: 400px;
+  background-image: url("/images/comics3.webp");
   background-size: cover;
-}
-header .contain-banner .banner {
-  width: 1400px;
+  position: relative;
 }
 
 .foto {
@@ -100,10 +96,11 @@ header .contain-banner .banner {
   font-size: 20px;
 }
 
-.detail-section {
-  display: none;
+main {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 10px;
+  align-items: center;
 }
 
 footer {
@@ -188,7 +185,8 @@ label {
 }
 
 .cont-card-detail {
-  display: flex;
+  margin: 5%;
+  display: none;
   width: 60%;
   background-color: pink;
   justify-content: center;
@@ -208,6 +206,26 @@ label {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.contain-btnpages {
+  margin: 3%;
+}
+.contain-btnpages button {
+  padding: 10px 20px;
+  font-size: 20px;
+  margin: 0px 10px;
+  border-radius: 10%;
+  border: none;
+}
+
+.contain-logo {
+  font-family: "Play", sans-serif;
+  font-size: 60px;
+  color: red;
+  text-align: center;
+  background-color: black;
+  height: 60px;
 }
 
 /*# sourceMappingURL=style.css.map */

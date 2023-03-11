@@ -1,21 +1,14 @@
 header {
     width: 100vw;
 
-    .contain-logo {
-        background-color: black;
-        height: 60px;
-    }
-
+ 
     .contain-banner {
-        //background-color: rgb(239, 192, 192);
         width: 100%;
-        //background-image: url("/images/banner.png");
-        background-size: cover; 
-        
-        .banner {
-            width: 1400px;
-            //background-size: cover; 
-        }
+    min-height: 400px;
+    background-image: url("/images/comics3.webp");
+    background-size: cover;
+    position: relative;
+      
     }
     
 }
