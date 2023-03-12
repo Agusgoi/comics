@@ -21,12 +21,18 @@ window.addEventListener("load", () => {
   const $typeFilter = $(".type-filter");
   const $orderSelect = $(".order-select");
 
+const $btnInitPage = $("#init-page");
+const $btnPreviousPage = $("#previous-page");
+const $btnNextPage = $("#next-page");
+const $btnLastPage = $("#last-page");
+
+
   let type = `comics`;
   let orderByDate = "";
   let orderByName = "";
   let orderByTitle = "";
   let nameSearch = "";
-  
+  let offset = 0
 
   // ------------------- Default array -------------------
 
@@ -51,7 +57,7 @@ window.addEventListener("load", () => {
     )
       .then((response) => response.json())
       .then((info) => {
-        console.log(info)
+       console.log(info)
         let arr = info.data.results;
         let arrCount = info.data.total;
         paint(arr);
@@ -100,6 +106,7 @@ window.addEventListener("load", () => {
 
     // Type
     if ($typeFilter.value === "characters") {
+      console.log($typeFilter.value )
       type = `characters`;
     } else {
       type = `comics`;
@@ -112,16 +119,23 @@ window.addEventListener("load", () => {
       } else if ($orderSelect.value === "mas-viejo") {
         orderByDate = `&orderBy=-focDate`;
       }
+    }else{
+      orderByDate ="";
     }
 
-    // Order by Name/Title
+    // Order by Name
     if ($typeFilter.value === "characters") {
+      orderByTitle = "";
       if ($orderSelect.value === "az") {
         orderByName = `&orderBy=name`;
       } else if ($orderSelect.value === "za") {
         orderByName = `&orderBy=-name`;
       }
-    } else {
+    } 
+
+     // Order by Title
+    if ($typeFilter.value === "comics") {
+      orderByName = "";
       if ($orderSelect.value === "az") {
         orderByTitle = `&orderBy=title`;
       } else if ($orderSelect.value === "za") {
@@ -161,5 +175,43 @@ window.addEventListener("load", () => {
     }
   });
 
+
+
+ ///////////////////////////////////////////////
+
+ /*  $btnNextPage.addEventListener("click", () => {
+    if(offset + 20 <= ) {
+        offset = offset + 20
+        // page = page + 1
+        loadPokemons()
+    }
+})
+
+$previousPage.addEventListener("click", () => {
+    if(offset > 0) {
+        offset = offset - 20
+        // page = page - 1
+        loadPokemons()
+    }
+})
+
+$initPage.addEventListener("click", () => {
+    if(offset != 0) {
+        offset = 0
+        // page = 1
+        loadPokemons()
+    }
+})
+
+$lastPage.addEventListener("click", () => {
+    if(offset + 20 <= totalPokemons) {
+        while(offset + 20 <= totalPokemons) {
+            offset += 20
+        }
+        loadPokemons()
+    }
+}) 
+
+ */
   //cierran el window
 });
