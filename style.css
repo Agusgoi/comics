@@ -222,4 +222,10 @@ label {
   height: 60px;
 }
 
+.desactivated {
+  background-color: rgb(227, 227, 227);
+  cursor: default;
+  color: rgb(201, 199, 199);
+}
+
 /*# sourceMappingURL=style.css.map */
