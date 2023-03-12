@@ -32,6 +32,7 @@ const $btnLastPage = $("#last-page");
   let orderByName = "";
   let orderByTitle = "";
   let nameSearch = "";
+  let titleSearch = "";
   let offset = 0
 
   // ------------------- Default array -------------------
@@ -53,7 +54,7 @@ const $btnLastPage = $("#last-page");
 
   const getArray = () => {
     fetch(
-      `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${orderByName}${orderByTitle}`
+      `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${titleSearch}${orderByName}${orderByTitle}`
     )
       .then((response) => response.json())
       .then((info) => {
@@ -100,8 +101,13 @@ const $btnLastPage = $("#last-page");
     // Search Input
     if ($searchInput.value === "") {
       nameSearch = "";
-    } else {
+      titleSearch = "";
+    } else if($typeFilter.value === "characters") {
       nameSearch = `&nameStartsWith=${$searchInput.value}`;
+      titleSearch = "";
+    } else {
+      titleSearch = `&titleStartsWith=${$searchInput.value}`;
+      nameSearch = "";
     }
 
     // Type
@@ -150,6 +156,7 @@ const $btnLastPage = $("#last-page");
 
   const results = (array, count) => {
     if (array != "") {
+      console.log(array)
       $results.innerText = `${count} resultado/s`;
     } else {
       $containCards.innerHTML = "";
