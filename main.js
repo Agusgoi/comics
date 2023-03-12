@@ -9,7 +9,6 @@ const hash = md5(`${ts}${privateKey}${publicKey}`);
 const $ = (selector) => document.querySelector(selector);
 
 window.addEventListener("load", () => {
-
   // variables
   const $containCards = $(".contain-cards");
   const $results = $(".results");
@@ -21,11 +20,10 @@ window.addEventListener("load", () => {
   const $typeFilter = $(".type-filter");
   const $orderSelect = $(".order-select");
 
-const $btnInitPage = $("#init-page");
-const $btnPreviousPage = $("#previous-page");
-const $btnNextPage = $("#next-page");
-const $btnLastPage = $("#last-page");
-
+  const $btnInitPage = $("#init-page");
+  const $btnPreviousPage = $("#previous-page");
+  const $btnNextPage = $("#next-page");
+  const $btnLastPage = $("#last-page");
 
   let type = `comics`;
   let orderByDate = "";
@@ -33,7 +31,8 @@ const $btnLastPage = $("#last-page");
   let orderByTitle = "";
   let nameSearch = "";
   let titleSearch = "";
-  let offset = 0
+  let offset = 0;
+  let arrCount;
 
   // ------------------- Default array -------------------
 
@@ -43,7 +42,7 @@ const $btnLastPage = $("#last-page");
     .then((response) => response.json())
     .then((info) => {
       let arr = info.data.results;
-      let arrCount = info.data.total;
+      arrCount = info.data.total;
       paint(arr);
       results(arr, arrCount);
     })
@@ -54,13 +53,13 @@ const $btnLastPage = $("#last-page");
 
   const getArray = () => {
     fetch(
-      `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${titleSearch}${orderByName}${orderByTitle}`
+      `https://gateway.marvel.com//v1/public/${type}?offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${titleSearch}${orderByName}${orderByTitle}`
     )
       .then((response) => response.json())
       .then((info) => {
-       console.log(info)
+        console.log(info);
         let arr = info.data.results;
-        let arrCount = info.data.total;
+        arrCount = info.data.total;
         paint(arr);
         results(arr, arrCount);
       })
@@ -68,7 +67,6 @@ const $btnLastPage = $("#last-page");
       .catch((error) => console.log(error));
   };
 
-  
   // ------------------- Paint -------------------
   const paint = (array) => {
     $containCards.innerHTML = "";
@@ -102,7 +100,7 @@ const $btnLastPage = $("#last-page");
     if ($searchInput.value === "") {
       nameSearch = "";
       titleSearch = "";
-    } else if($typeFilter.value === "characters") {
+    } else if ($typeFilter.value === "characters") {
       nameSearch = `&nameStartsWith=${$searchInput.value}`;
       titleSearch = "";
     } else {
@@ -112,7 +110,7 @@ const $btnLastPage = $("#last-page");
 
     // Type
     if ($typeFilter.value === "characters") {
-      console.log($typeFilter.value )
+      console.log($typeFilter.value);
       type = `characters`;
     } else {
       type = `comics`;
@@ -125,8 +123,8 @@ const $btnLastPage = $("#last-page");
       } else if ($orderSelect.value === "mas-viejo") {
         orderByDate = `&orderBy=-focDate`;
       }
-    }else{
-      orderByDate ="";
+    } else {
+      orderByDate = "";
     }
 
     // Order by Name
@@ -137,9 +135,9 @@ const $btnLastPage = $("#last-page");
       } else if ($orderSelect.value === "za") {
         orderByName = `&orderBy=-name`;
       }
-    } 
+    }
 
-     // Order by Title
+    // Order by Title
     if ($typeFilter.value === "comics") {
       orderByName = "";
       if ($orderSelect.value === "az") {
@@ -156,7 +154,7 @@ const $btnLastPage = $("#last-page");
 
   const results = (array, count) => {
     if (array != "") {
-      console.log(array)
+      //console.log(array)
       $results.innerText = `${count} resultado/s`;
     } else {
       $containCards.innerHTML = "";
@@ -182,43 +180,41 @@ const $btnLastPage = $("#last-page");
     }
   });
 
+  // ------------------- Pages -------------------
 
+  $btnNextPage.addEventListener("click", () => {
+    if (offset + 20 <= arrCount) {
+      offset = offset + 20;
 
- ///////////////////////////////////////////////
-
- /*  $btnNextPage.addEventListener("click", () => {
-    if(offset + 20 <= ) {
-        offset = offset + 20
-        // page = page + 1
-        loadPokemons()
+      getArray();
     }
-})
+  });
 
-$previousPage.addEventListener("click", () => {
-    if(offset > 0) {
-        offset = offset - 20
-        // page = page - 1
-        loadPokemons()
+  $btnPreviousPage.addEventListener("click", () => {
+    if (offset > 0) {
+      offset = offset - 20;
+
+      getArray();
     }
-})
+  });
 
-$initPage.addEventListener("click", () => {
-    if(offset != 0) {
-        offset = 0
-        // page = 1
-        loadPokemons()
+  $btnInitPage.addEventListener("click", () => {
+    if (offset != 0) {
+      offset = 0;
+
+      getArray();
     }
-})
+  });
 
-$lastPage.addEventListener("click", () => {
-    if(offset + 20 <= totalPokemons) {
-        while(offset + 20 <= totalPokemons) {
-            offset += 20
-        }
-        loadPokemons()
+  $btnLastPage.addEventListener("click", () => {
+    if (offset + 20 <= arrCount) {
+      while (offset + 20 <= arrCount) {
+        offset += 20;
+      }
+
+      getArray();
     }
-}) 
+  });
 
- */
   //cierran el window
 });
