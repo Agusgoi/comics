@@ -59,15 +59,6 @@ header .contain-banner {
   position: relative;
 }
 
-.foto {
-  width: 50%;
-}
-
-#mujer {
-  min-width: 200px;
-  max-width: 500px;
-}
-
 .search-section {
   width: 100vw;
   background-color: rgb(75, 130, 137);

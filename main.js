@@ -51,6 +51,7 @@ window.addEventListener("load", () => {
     )
       .then((response) => response.json())
       .then((info) => {
+        console.log(info)
         let arr = info.data.results;
         let arrCount = info.data.total;
         paint(arr);
