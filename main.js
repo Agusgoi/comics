@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
   let arrCount;
 
   // ------------------- Default array -------------------
-
+  btnDesactivated();
   fetch(
     `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
   )
@@ -52,6 +52,7 @@ window.addEventListener("load", () => {
   // ------------------- GET array -------------------
 
   const getArray = () => {
+btnDesactivated();
     fetch(
       `https://gateway.marvel.com//v1/public/${type}?offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${titleSearch}${orderByName}${orderByTitle}`
     )
@@ -215,6 +216,24 @@ window.addEventListener("load", () => {
       getArray();
     }
   });
+
+  function btnDesactivated () {
+    if (offset < 20) {
+        $btnPreviousPage.classList.add("desactivated")
+        $btnInitPage.classList.add("desactivated")
+    } else {
+      $btnPreviousPage.classList.remove("desactivated")
+      $btnInitPage.classList.remove("desactivated")
+    }
+
+    if(offset + 20 > arrCount) {
+        $btnNextPage.classList.add("desactivated")
+        $btnLastPage.classList.add("desactivated")
+    } else {
+      $btnNextPage.classList.remove("desactivated")
+      $btnLastPage.classList.remove("desactivated")
+    }
+}
 
   //cierran el window
 });
