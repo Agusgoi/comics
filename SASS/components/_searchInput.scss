@@ -1,16 +1,35 @@
 .search-box {
-    width: 50%;
-    height: 60px;
-   
-    
+  width: 50%;
+  height: 60px;
+
+  .search-input {
+    height: 100%;
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 25px;
+    opacity: 50%;
+    font-family: $genericFontType;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .search-box {
+    height: 35px;
+
     .search-input {
-        height: 100%;
-        width: 80%;
-        border: none;
-        border-radius: 10px;
-        padding: 10px;
-        font-size: 25px;
-        opacity: 50%;
-        font-family: $genericFontType;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 15px;
     }
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .search-box {
+    height: 30px;
+
+  }
 }

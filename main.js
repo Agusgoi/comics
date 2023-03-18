@@ -13,13 +13,11 @@ window.addEventListener("load", () => {
   const $containCards = $(".contain-cards");
   const $results = $(".results");
   const $containCardDetail = $(".cont-card-detail");
-
-  const $btnSearch = $(".btn-search");
-
   const $searchInput = $(".search-input");
   const $typeFilter = $(".type-filter");
   const $orderSelect = $(".order-select");
-
+  
+  const $btnSearch = $(".btn-search");
   const $btnInitPage = $("#init-page");
   const $btnPreviousPage = $("#previous-page");
   const $btnNextPage = $("#next-page");
@@ -157,7 +155,6 @@ window.addEventListener("load", () => {
 
   const results = (array, count) => {
     if (array != "") {
-      //console.log(array)
       $results.innerText = `${count} resultado/s`;
     } else {
       $containCards.innerHTML = "";
