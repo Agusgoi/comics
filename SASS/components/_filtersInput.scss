@@ -1,14 +1,39 @@
 select {
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    padding: 0px 30px;
-    height: 50px;
-    font-family: $genericFontType;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 0px 30px;
+  height: 50px;
+  font-family: $genericFontType;
 }
 
 label {
-    font-size: 20px;
-    padding-right: 10px;
-    font-family: $genericFontType;
+  font-size: 20px;
+  padding-right: 10px;
+  font-family: $genericFontType;
+}
+
+@media screen and (max-width: 780px) {
+  select {
+    font-size: 15px;
+    padding: 0px 15px;
+    height: 35px;
+  }
+
+  label {
+    font-size: 15px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  select {
+    font-size: 12px;
+    padding: 0px 5px;
+    height: 30px;
+  }
+
+  label {
+    font-size: 12px;
+  }
 }

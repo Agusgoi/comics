@@ -1,34 +1,91 @@
 .search-section {
-    width: 100vw;
-    background-color: rgb(75, 130, 137);
-    
+  width: 100vw;
+  height: 550px;
+  background-color: rgb(75, 130, 137);
 
-    .contain-search h2{
-        padding: 50px 0px 0px 70px;
-        font-size: 30px;
-        font-family: $genericFontType;
+  .contain-search h2 {
+    padding: 50px 0px 0px 70px;
+    font-size: 30px;
+    font-family: $genericFontType;
+  }
+
+  .contain-search .cont-search-inputs {
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+    align-items: last baseline;
+    padding: 20px;
+  }
+
+  .result-box {
+    padding: 50px 0px 50px 70px;
+    font-family: $genericFontType;
+
+    h2 {
+      padding-bottom: 30px;
+      font-size: 30px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .search-section {
+    height: 220px;
+
+    .contain-search h2 {
+      padding: 20px 0px 0px 30px;
+      font-size: 20px;
     }
 
     .contain-search .cont-search-inputs {
-            display: flex;
-            gap: 30px;
-            justify-content: space-evenly;
-            align-items: center;
-            padding: 20px;
-        }
+      gap: 10px;
+      padding: 20px;
+    }
 
-        .result-box {
-            padding: 50px 0px 50px 70px;
-            font-family: $genericFontType;
+    .result-box {
+      padding: 20px 0px 0px 30px;
 
-            h2 {
-                padding-bottom: 30px;
-                font-size: 30px;
-            }
+      h2 {
+        padding-bottom: 10px;
+        font-size: 20px;
+      }
 
-            h3 {
-                font-size: 20px;
-            }
-        }
+      h3 {
+        font-size: 15px;
+      }
+    }
+  }
+}
 
+@media screen and (max-width: 480px) {
+  .search-section {
+    height: 180px;
+
+    .contain-search h2 {
+      padding: 10px 0px 0px 20px;
+      font-size: 15px;
+    }
+
+    .contain-search .cont-search-inputs {
+      gap: 5px;
+      padding: 10px;
+    }
+
+    .result-box {
+      padding: 10px 0px 0px 20px;
+
+      h2 {
+        padding-bottom: 10px;
+        font-size: 15px;
+      }
+
+      h3 {
+        font-size: 12px;
+      }
+    }
+  }
 }
