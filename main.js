@@ -33,14 +33,12 @@ window.addEventListener("load", () => {
   let titleSearch = "";
   let offset = 0;
   let arrCount;
-  let arr
+  let arr;
   //let id = "";
 
   // ------------------- Default array -------------------
   btnDesactivated();
 
-
-  
   fetch(
     `https://gateway.marvel.com//v1/public/${type}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
   )
@@ -50,41 +48,26 @@ window.addEventListener("load", () => {
       arrCount = info.data.total;
       paint(arr);
       results(arr, arrCount);
-  
-
-     
     })
 
     .catch((error) => console.log(error));
 
   // ------------------- GET array -------------------
 
-
-
-
-
   const getArray = () => {
-btnDesactivated();
+    btnDesactivated();
     fetch(
       `https://gateway.marvel.com//v1/public/${type}?offset=${offset}&ts=${ts}&apikey=${publicKey}&hash=${hash}${orderByDate}${nameSearch}${titleSearch}${orderByName}${orderByTitle}`
     )
       .then((response) => response.json())
       .then((info) => {
-      
         arr = info.data.results;
         arrCount = info.data.total;
         paint(arr);
         results(arr, arrCount);
-      
-        
-  })
-  .catch((error) => console.log(error));
-    }
-  
-
-
-     
-  
+      })
+      .catch((error) => console.log(error));
+  };
 
   // ------------------- Paint -------------------
   const paint = (array) => {
@@ -111,7 +94,7 @@ btnDesactivated();
       }
     });
 
-    cardSelected ()
+    cardSelected();
   };
 
   // ------------------- btn Event + FILTERS -------------------
@@ -203,8 +186,8 @@ btnDesactivated();
   // ------------------- Pages -------------------
 
   $btnNextPage.addEventListener("click", () => {
-    console.log(offset)
-    console.log(arrCount)
+    console.log(offset);
+    console.log(arrCount);
     if (offset + 20 <= arrCount) {
       offset = offset + 20;
 
@@ -238,84 +221,79 @@ btnDesactivated();
     }
   });
 
-  function btnDesactivated () {
+  function btnDesactivated() {
     if (offset < 20) {
-        $btnPreviousPage.classList.add("desactivated")
-        $btnInitPage.classList.add("desactivated")
+      $btnPreviousPage.classList.add("desactivated");
+      $btnInitPage.classList.add("desactivated");
     } else {
-      $btnPreviousPage.classList.remove("desactivated")
-      $btnInitPage.classList.remove("desactivated")
+      $btnPreviousPage.classList.remove("desactivated");
+      $btnInitPage.classList.remove("desactivated");
     }
 
-    if(offset + 20 > arrCount) {
-        $btnNextPage.classList.add("desactivated")
-        $btnLastPage.classList.add("desactivated")
+    if (offset + 20 > arrCount) {
+      $btnNextPage.classList.add("desactivated");
+      $btnLastPage.classList.add("desactivated");
     } else {
-      $btnNextPage.classList.remove("desactivated")
-      $btnLastPage.classList.remove("desactivated")
+      $btnNextPage.classList.remove("desactivated");
+      $btnLastPage.classList.remove("desactivated");
     }
-}
+  }
 
-//////////////////
+  // ------------------- Card Selected -------------------
 
+  const cardSelected = () => {
+    let $cards = document.querySelectorAll(".card");
+    $cards.forEach((card) => {
+      card.addEventListener("click", (e) => {
+        paintCardDetail(card.id);
+      });
+    });
+  };
 
+  // ------------------- Paint Card Detail -------------------
 
+  const paintCardDetail = (id) => {
+    fetch(
+      `https://gateway.marvel.com//v1/public/${type}/${id}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+    )
+      .then((response) => response.json())
+      .then((info) => {
+        cardInfo = info.data.results[0];
+        console.log(cardInfo);
+        console.log(type);
+        $containCards.style.display = "none";
+        $containCardDetail.style.display = "flex";
+        $containCardDetail.innerHTML = "";
 
-const cardSelected = () =>{
-  let $cards = document.querySelectorAll(".card");
-  $cards.forEach((card) => {
-    card.addEventListener("click", (e) => {
-paintCardDetail (card.id)
-    })
-  })
-}
-
-////////////////////////////////////////////////////
-
-
-
-const paintCardDetail = (id) => {
-  fetch(`https://gateway.marvel.com//v1/public/${type}/${id}?ts=${ts}&apikey=${publicKey}&hash=${hash}`)
-    .then(response => response.json())
-    .then(info => {
-      cardInfo = info.data.results[0];
-      console.log(cardInfo)
-      console.log(type)
-      $containCards.style.display = 'none';
-      $containCardDetail.style.display = 'flex';
-      $containCardDetail.innerHTML = "";
-
-      if(type === 'comics'){
-      $containCardDetail.innerHTML += `
+        if (type === "comics") {
+          $containCardDetail.innerHTML += `
       <div class="contain-img">
-      <img class="card-img" src=${cardInfo.thumbnail.path + "." + cardInfo.thumbnail.extension
+      <img class="card-img" src=${
+        cardInfo.thumbnail.path + "." + cardInfo.thumbnail.extension
       }>
   </div>
   <div class="card-info">
       <h3>${cardInfo.title}</h3>
       <p>Creado por: ${cardInfo.creators.items[0].name}</p>
       <p>Descripcion: ${cardInfo.description}</p>
-  </div>`
-
-}else{
-  $containCardDetail.innerHTML += `
+  </div>
+  
+  `
+        } else {
+          $containCardDetail.innerHTML += `
   <div class="contain-img">
-  <img class="card-img" src=${cardInfo.thumbnail.path + "." + cardInfo.thumbnail.extension
+  <img class="card-img" src=${
+    cardInfo.thumbnail.path + "." + cardInfo.thumbnail.extension
   }>
 </div>
 <div class="card-info">
   <h3>${cardInfo.name}</h3>
   <p>Descripcion: ${cardInfo.description}</p>
-</div>`
-}
-    
+</div>`;
+        }
       })
-        .catch((error) => console.log(error));
-      } 
-
-   
-
-
+      .catch((error) => console.log(error));
+  };
 
   //cierran el window
 });
